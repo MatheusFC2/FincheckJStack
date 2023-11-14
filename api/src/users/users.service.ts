@@ -49,40 +49,6 @@ export class UsersService {
       },
     });
 
-    // await this.prismaService.category.createMany({
-    //   data: [
-    //     // Income
-    //     { userId: user.id, name: 'Salário', icon: 'salary', type: 'INCOME' },
-    //     {
-    //       userId: user.id,
-    //       name: 'Freelance',
-    //       icon: 'freelance',
-    //       type: 'INCOME',
-    //     },
-    //     { userId: user.id, name: 'Outro', icon: 'other', type: 'INCOME' },
-    //     // Expense
-    //     { userId: user.id, name: 'Casa', icon: 'home', type: 'EXPENSE' },
-    //     { userId: user.id, name: 'Alimentação', icon: 'food', type: 'EXPENSE' },
-    //     {
-    //       userId: user.id,
-    //       name: 'Educação',
-    //       icon: 'education',
-    //       type: 'EXPENSE',
-    //     },
-    //     { userId: user.id, name: 'Lazer', icon: 'fun', type: 'EXPENSE' },
-    //     { userId: user.id, name: 'Mercado', icon: 'grocery', type: 'EXPENSE' },
-    //     { userId: user.id, name: 'Roupas', icon: 'clothes', type: 'EXPENSE' },
-    //     {
-    //       userId: user.id,
-    //       name: 'Transporte',
-    //       icon: 'transport',
-    //       type: 'EXPENSE',
-    //     },
-    //     { userId: user.id, name: 'Viagem', icon: 'travel', type: 'EXPENSE' },
-    //     { userId: user.id, name: 'Outro', icon: 'other', type: 'EXPENSE' },
-    //   ],
-    // });
-
     return {
       name: user.name,
       email: user.email,
