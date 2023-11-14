@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../database/prisma.service");
+const bcryptjs_1 = require("bcryptjs");
 let UsersService = class UsersService {
     constructor(prismaService) {
         this.prismaService = prismaService;
@@ -20,14 +21,41 @@ let UsersService = class UsersService {
         const { name, email, password } = createUserDto;
         const emailTaken = await this.prismaService.user.findUnique({
             where: { email },
+            select: { id: true },
         });
         if (emailTaken) {
             throw new common_1.ConflictException('User alreadyja tem carai');
         }
+        const hashedPassword = await (0, bcryptjs_1.hash)(password, 12);
         const user = await this.prismaService.user.create({
-            data: { name, email, password },
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+                categories: {
+                    createMany: {
+                        data: [
+                            { name: 'Salário', icon: 'salary', type: 'INCOME' },
+                            { name: 'Freelance', icon: 'freelance', type: 'INCOME' },
+                            { name: 'Outro', icon: 'other', type: 'INCOME' },
+                            { name: 'Casa', icon: 'home', type: 'EXPENSE' },
+                            { name: 'Alimentação', icon: 'food', type: 'EXPENSE' },
+                            { name: 'Educação', icon: 'education', type: 'EXPENSE' },
+                            { name: 'Lazer', icon: 'fun', type: 'EXPENSE' },
+                            { name: 'Mercado', icon: 'grocery', type: 'EXPENSE' },
+                            { name: 'Roupas', icon: 'clothes', type: 'EXPENSE' },
+                            { name: 'Transporte', icon: 'transport', type: 'EXPENSE' },
+                            { name: 'Viagem', icon: 'travel', type: 'EXPENSE' },
+                            { name: 'Outro', icon: 'other', type: 'EXPENSE' },
+                        ],
+                    },
+                },
+            },
         });
-        return user;
+        return {
+            name: user.name,
+            email: user.email,
+        };
     }
 };
 UsersService = __decorate([
