@@ -11,15 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../../shared/database/prisma.service");
 const bcryptjs_1 = require("bcryptjs");
+const users_repositories_1 = require("../../shared/database/repositories/users.repositories");
 let UsersService = class UsersService {
-    constructor(prismaService) {
-        this.prismaService = prismaService;
+    constructor(userRepo) {
+        this.userRepo = userRepo;
     }
     async create(createUserDto) {
         const { name, email, password } = createUserDto;
-        const emailTaken = await this.prismaService.user.findUnique({
+        const emailTaken = await this.userRepo.findUnique({
             where: { email },
             select: { id: true },
         });
@@ -27,7 +27,7 @@ let UsersService = class UsersService {
             throw new common_1.ConflictException('User alreadyja tem carai');
         }
         const hashedPassword = await (0, bcryptjs_1.hash)(password, 12);
-        const user = await this.prismaService.user.create({
+        const user = await this.userRepo.create({
             data: {
                 name,
                 email,
@@ -60,7 +60,7 @@ let UsersService = class UsersService {
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [users_repositories_1.UsersRepository])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

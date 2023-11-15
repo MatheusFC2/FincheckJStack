@@ -1,8 +1,8 @@
 import { CreateUserDto } from './dto/create-user.dto';
-import { PrismaService } from 'src/shared/database/prisma.service';
+import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
 export declare class UsersService {
-    private readonly prismaService;
-    constructor(prismaService: PrismaService);
+    private readonly userRepo;
+    constructor(userRepo: UsersRepository);
     create(createUserDto: CreateUserDto): Promise<{
         name: string;
         email: string;
