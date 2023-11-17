@@ -13,9 +13,11 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_repositories_1 = require("../../shared/database/repositories/users.repositories");
 const bcryptjs_1 = require("bcryptjs");
+const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
-    constructor(usersRepo) {
+    constructor(usersRepo, jwtService) {
         this.usersRepo = usersRepo;
+        this.jwtService = jwtService;
     }
     async authenticate(authenticateDto) {
         const { email, password } = authenticateDto;
@@ -29,12 +31,14 @@ let AuthService = class AuthService {
         if (!isPasswordValid) {
             throw new common_1.UnauthorizedException('Invalid credentials');
         }
-        return { isPasswordValid };
+        const accessToken = await this.jwtService.signAsync({ sub: user.id });
+        return { accessToken };
     }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_repositories_1.UsersRepository])
+    __metadata("design:paramtypes", [users_repositories_1.UsersRepository,
+        jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map
