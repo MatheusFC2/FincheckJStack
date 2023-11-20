@@ -17,10 +17,16 @@ class Env {
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], Env.prototype, "dbURL", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.NotEquals)('unsecure_jwt_secret'),
     __metadata("design:type", String)
 ], Env.prototype, "jwtSecret", void 0);
 exports.env = (0, class_transformer_1.plainToInstance)(Env, {
+    dbURL: process.env.DATABASE_URL,
     jwtSecret: process.env.JWT_SECRET,
 });
 const errors = (0, class_validator_1.validateSync)(exports.env);
