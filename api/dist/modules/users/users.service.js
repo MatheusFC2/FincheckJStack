@@ -9,6 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 let UsersService = class UsersService {
+    getUserById(userId) {
+        return { userId };
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)()
