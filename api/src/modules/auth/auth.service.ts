@@ -85,6 +85,6 @@ export class AuthService {
   }
 
   private generateAccessToken(userId: string) {
-    return this.jwtService.sign({ sub: userId });
+    return this.jwtService.signAsync({ sub: userId });
   }
 }

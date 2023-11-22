@@ -73,7 +73,7 @@ let AuthService = class AuthService {
         return { accessToken };
     }
     generateAccessToken(userId) {
-        return this.jwtService.sign({ sub: userId });
+        return this.jwtService.signAsync({ sub: userId });
     }
 };
 AuthService = __decorate([
