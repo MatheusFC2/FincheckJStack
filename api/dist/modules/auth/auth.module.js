@@ -18,8 +18,9 @@ AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
             jwt_1.JwtModule.register({
+                global: true,
+                signOptions: { expiresIn: '7d' },
                 secret: env_1.env.jwtSecret,
-                signOptions: { expiresIn: '1d' },
             }),
         ],
         controllers: [auth_controller_1.AuthController],
