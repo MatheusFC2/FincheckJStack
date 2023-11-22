@@ -7,7 +7,7 @@ export declare class AuthController {
     signin(signinDto: SigninDto): Promise<{
         accessToken: string;
     }>;
-    craete(signupDto: SignupDto): Promise<{
+    signup(signupDto: SignupDto): Promise<{
         accessToken: string;
     }>;
 }

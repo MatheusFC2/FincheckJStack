@@ -24,12 +24,13 @@ let AuthController = class AuthController {
     signin(signinDto) {
         return this.authService.signin(signinDto);
     }
-    craete(signupDto) {
+    signup(signupDto) {
         return this.authService.signup(signupDto);
     }
 };
 __decorate([
     (0, common_1.Post)('signin'),
+    (0, common_1.SetMetadata)('IS_PUBLIC', true),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signin_1.SigninDto]),
@@ -37,11 +38,12 @@ __decorate([
 ], AuthController.prototype, "signin", null);
 __decorate([
     (0, common_1.Post)('signup'),
+    (0, common_1.SetMetadata)('IS_PUBLIC', true),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signup_1.SignupDto]),
     __metadata("design:returntype", void 0)
-], AuthController.prototype, "craete", null);
+], AuthController.prototype, "signup", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
