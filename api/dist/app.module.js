@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const users_module_1 = require("./modules/users/users.module");
 const database_module_1 = require("./shared/database/database.module");
 const auth_module_1 = require("./modules/auth/auth.module");
+const auth_guard_1 = require("./modules/auth/auth.guard");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -20,7 +21,7 @@ AppModule = __decorate([
         providers: [
             {
                 provide: 'APP_GUARD',
-                useClass: auth_module_1.AuthModule,
+                useClass: auth_guard_1.AuthGuard,
             },
         ],
     })
