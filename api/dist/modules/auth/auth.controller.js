@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const signin_1 = require("./dto/signin");
 const signup_1 = require("./dto/signup");
+const IsPublic_1 = require("../../shared/decorators/IsPublic");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -30,7 +31,6 @@ let AuthController = class AuthController {
 };
 __decorate([
     (0, common_1.Post)('signin'),
-    (0, common_1.SetMetadata)('IS_PUBLIC', true),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signin_1.SigninDto]),
@@ -38,13 +38,13 @@ __decorate([
 ], AuthController.prototype, "signin", null);
 __decorate([
     (0, common_1.Post)('signup'),
-    (0, common_1.SetMetadata)('IS_PUBLIC', true),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signup_1.SignupDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signup", null);
 AuthController = __decorate([
+    (0, IsPublic_1.IsPublic)(),
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);

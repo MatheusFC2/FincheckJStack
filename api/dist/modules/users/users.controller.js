@@ -15,19 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
+const ActiveUserId_1 = require("../../shared/decorators/ActiveUserId");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    me(request) {
-        return this.usersService.getUserById(request.userId);
+    me(userId) {
+        return this.usersService.getUserById(userId);
     }
 };
 __decorate([
     (0, common_1.Get)('/me'),
-    __param(0, (0, common_1.Req)()),
+    __param(0, (0, ActiveUserId_1.ActiveUserId)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "me", null);
 UsersController = __decorate([
