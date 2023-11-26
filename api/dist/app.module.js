@@ -12,11 +12,12 @@ const users_module_1 = require("./modules/users/users.module");
 const database_module_1 = require("./shared/database/database.module");
 const auth_module_1 = require("./modules/auth/auth.module");
 const auth_guard_1 = require("./modules/auth/auth.guard");
+const categories_module_1 = require("./modules/categories/categories.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule, database_module_1.DatabaseModule, auth_module_1.AuthModule],
+        imports: [users_module_1.UsersModule, database_module_1.DatabaseModule, auth_module_1.AuthModule, categories_module_1.CategoriesModule],
         controllers: [],
         providers: [
             {
