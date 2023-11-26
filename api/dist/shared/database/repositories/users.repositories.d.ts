@@ -9,7 +9,7 @@ export declare class UsersRepository {
         email: string;
         password: string;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
-    findUnique(findUnique: Prisma.UserFindUniqueArgs): Prisma.Prisma__UserClient<{
+    findUnique(findUniqueDto: Prisma.UserFindUniqueArgs): Prisma.Prisma__UserClient<{
         id: string;
         name: string;
         email: string;

@@ -1,9 +1,12 @@
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoriesRepository } from 'src/shared/database/repositories/categories.repositories';
 export declare class CategoriesService {
-    create(createCategoryDto: CreateCategoryDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateCategoryDto: UpdateCategoryDto): string;
-    remove(id: number): string;
+    private readonly categoriesRepo;
+    constructor(categoriesRepo: CategoriesRepository);
+    findAllByUserId(userId: string): import(".prisma/client").Prisma.PrismaPromise<{
+        id: string;
+        userId: string;
+        name: string;
+        icon: string;
+        type: import(".prisma/client").$Enums.TransactionType;
+    }[]>;
 }

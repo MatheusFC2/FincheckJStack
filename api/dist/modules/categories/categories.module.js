@@ -15,7 +15,7 @@ let CategoriesModule = class CategoriesModule {
 CategoriesModule = __decorate([
     (0, common_1.Module)({
         controllers: [categories_controller_1.CategoriesController],
-        providers: [categories_service_1.CategoriesService]
+        providers: [categories_service_1.CategoriesService],
     })
 ], CategoriesModule);
 exports.CategoriesModule = CategoriesModule;

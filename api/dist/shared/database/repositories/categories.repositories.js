@@ -9,23 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersRepository = void 0;
+exports.CategoriesRepository = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
-let UsersRepository = class UsersRepository {
+let CategoriesRepository = class CategoriesRepository {
     constructor(prismaService) {
         this.prismaService = prismaService;
     }
-    create(createUserDto) {
-        return this.prismaService.user.create(createUserDto);
-    }
-    findUnique(findUniqueDto) {
-        return this.prismaService.user.findUnique(findUniqueDto);
+    findMany(findManyDto) {
+        return this.prismaService.category.findMany(findManyDto);
     }
 };
-UsersRepository = __decorate([
+CategoriesRepository = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], UsersRepository);
-exports.UsersRepository = UsersRepository;
-//# sourceMappingURL=users.repositories.js.map
+], CategoriesRepository);
+exports.CategoriesRepository = CategoriesRepository;
+//# sourceMappingURL=categories.repositories.js.map
