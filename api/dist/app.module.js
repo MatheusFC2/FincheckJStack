@@ -13,11 +13,12 @@ const database_module_1 = require("./shared/database/database.module");
 const auth_module_1 = require("./modules/auth/auth.module");
 const auth_guard_1 = require("./modules/auth/auth.guard");
 const categories_module_1 = require("./modules/categories/categories.module");
+const bank_accounts_module_1 = require("./modules/bank-accounts/bank-accounts.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule, database_module_1.DatabaseModule, auth_module_1.AuthModule, categories_module_1.CategoriesModule],
+        imports: [users_module_1.UsersModule, database_module_1.DatabaseModule, auth_module_1.AuthModule, categories_module_1.CategoriesModule, bank_accounts_module_1.BankAccountsModule],
         controllers: [],
         providers: [
             {
