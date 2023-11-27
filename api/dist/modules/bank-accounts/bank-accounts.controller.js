@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const bank_accounts_service_1 = require("./bank-accounts.service");
 const create_bank_account_dto_1 = require("./dto/create-bank-account.dto");
 const update_bank_account_dto_1 = require("./dto/update-bank-account.dto");
+const IsPublic_1 = require("../../shared/decorators/IsPublic");
 let BankAccountsController = class BankAccountsController {
     constructor(bankAccountsService) {
         this.bankAccountsService = bankAccountsService;
@@ -58,7 +59,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
+    (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -73,6 +74,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "remove", null);
 BankAccountsController = __decorate([
+    (0, IsPublic_1.IsPublic)(),
     (0, common_1.Controller)('bank-accounts'),
     __metadata("design:paramtypes", [bank_accounts_service_1.BankAccountsService])
 ], BankAccountsController);
