@@ -17,19 +17,16 @@ const common_1 = require("@nestjs/common");
 const bank_accounts_service_1 = require("./bank-accounts.service");
 const create_bank_account_dto_1 = require("./dto/create-bank-account.dto");
 const update_bank_account_dto_1 = require("./dto/update-bank-account.dto");
-const IsPublic_1 = require("../../shared/decorators/IsPublic");
+const ActiveUserId_1 = require("../../shared/decorators/ActiveUserId");
 let BankAccountsController = class BankAccountsController {
     constructor(bankAccountsService) {
         this.bankAccountsService = bankAccountsService;
     }
-    create(createBankAccountDto) {
-        return this.bankAccountsService.create(createBankAccountDto);
+    create(userId, createBankAccountDto) {
+        return this.bankAccountsService.create(userId, createBankAccountDto);
     }
-    findAll() {
-        return this.bankAccountsService.findAll();
-    }
-    findOne(id) {
-        return this.bankAccountsService.findOne(+id);
+    findAll(userId) {
+        return this.bankAccountsService.findAllByUserId(userId);
     }
     update(id, updateBankAccountDto) {
         return this.bankAccountsService.update(+id, updateBankAccountDto);
@@ -40,24 +37,19 @@ let BankAccountsController = class BankAccountsController {
 };
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, ActiveUserId_1.ActiveUserId)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_bank_account_dto_1.CreateBankAccountDto]),
+    __metadata("design:paramtypes", [String, create_bank_account_dto_1.CreateBankAccountDto]),
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], BankAccountsController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, ActiveUserId_1.ActiveUserId)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], BankAccountsController.prototype, "findOne", null);
+], BankAccountsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -74,7 +66,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "remove", null);
 BankAccountsController = __decorate([
-    (0, IsPublic_1.IsPublic)(),
     (0, common_1.Controller)('bank-accounts'),
     __metadata("design:paramtypes", [bank_accounts_service_1.BankAccountsService])
 ], BankAccountsController);

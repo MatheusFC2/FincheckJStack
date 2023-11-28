@@ -4,9 +4,22 @@ import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 export declare class BankAccountsController {
     private readonly bankAccountsService;
     constructor(bankAccountsService: BankAccountsService);
-    create(createBankAccountDto: CreateBankAccountDto): string;
-    findAll(): string;
-    findOne(id: string): string;
+    create(userId: string, createBankAccountDto: CreateBankAccountDto): import(".prisma/client").Prisma.Prisma__BankAccountClient<{
+        id: string;
+        userId: string;
+        name: string;
+        initialBalance: number;
+        type: import(".prisma/client").$Enums.BankAccountType;
+        color: string;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    findAll(userId: string): import(".prisma/client").Prisma.PrismaPromise<{
+        id: string;
+        userId: string;
+        name: string;
+        initialBalance: number;
+        type: import(".prisma/client").$Enums.BankAccountType;
+        color: string;
+    }[]>;
     update(id: string, updateBankAccountDto: UpdateBankAccountDto): string;
     remove(id: string): string;
 }

@@ -18,7 +18,13 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule, database_module_1.DatabaseModule, auth_module_1.AuthModule, categories_module_1.CategoriesModule, bank_accounts_module_1.BankAccountsModule],
+        imports: [
+            users_module_1.UsersModule,
+            database_module_1.DatabaseModule,
+            auth_module_1.AuthModule,
+            categories_module_1.CategoriesModule,
+            bank_accounts_module_1.BankAccountsModule,
+        ],
         controllers: [],
         providers: [
             {

@@ -15,7 +15,7 @@ let BankAccountsModule = class BankAccountsModule {
 BankAccountsModule = __decorate([
     (0, common_1.Module)({
         controllers: [bank_accounts_controller_1.BankAccountsController],
-        providers: [bank_accounts_service_1.BankAccountsService]
+        providers: [bank_accounts_service_1.BankAccountsService],
     })
 ], BankAccountsModule);
 exports.BankAccountsModule = BankAccountsModule;

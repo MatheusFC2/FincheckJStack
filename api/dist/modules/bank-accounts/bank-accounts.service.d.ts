@@ -1,9 +1,25 @@
 import { CreateBankAccountDto } from './dto/create-bank-account.dto';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
+import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repositories';
 export declare class BankAccountsService {
-    create(createBankAccountDto: CreateBankAccountDto): string;
-    findAll(): string;
-    findOne(id: number): string;
+    private readonly bankAccountsRepo;
+    constructor(bankAccountsRepo: BankAccountsRepository);
+    create(userId: string, createBankAccountDto: CreateBankAccountDto): import(".prisma/client").Prisma.Prisma__BankAccountClient<{
+        id: string;
+        userId: string;
+        name: string;
+        initialBalance: number;
+        type: import(".prisma/client").$Enums.BankAccountType;
+        color: string;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    findAllByUserId(userId: string): import(".prisma/client").Prisma.PrismaPromise<{
+        id: string;
+        userId: string;
+        name: string;
+        initialBalance: number;
+        type: import(".prisma/client").$Enums.BankAccountType;
+        color: string;
+    }[]>;
     update(id: number, updateBankAccountDto: UpdateBankAccountDto): string;
     remove(id: number): string;
 }
