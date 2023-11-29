@@ -19,4 +19,12 @@ export declare class BankAccountsRepository {
         type: import(".prisma/client").$Enums.BankAccountType;
         color: string;
     }[]>;
+    findFirst(findFirstDto: Prisma.BankAccountFindFirstArgs): Prisma.Prisma__BankAccountClient<{
+        id: string;
+        userId: string;
+        name: string;
+        initialBalance: number;
+        type: import(".prisma/client").$Enums.BankAccountType;
+        color: string;
+    }, null, import("@prisma/client/runtime/library").DefaultArgs>;
 }

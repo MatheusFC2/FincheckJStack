@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBankAccountDto } from './dto/create-bank-account.dto';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repositories';
@@ -27,11 +27,22 @@ export class BankAccountsService {
     });
   }
 
-  update(id: number, updateBankAccountDto: UpdateBankAccountDto) {
-    return `This action updates a #${id} bankAccount`;
+  async update(
+    userId: string,
+    bankAccountId: string,
+    updateBankAccountDto: UpdateBankAccountDto,
+  ) {
+    const isOwner = await this.bankAccountsRepo.findFirst({
+      where: { userId, id: bankAccountId },
+    });
+
+    if (!isOwner) {
+      throw new NotFoundException('You are not the owner of this bank account');
+    }
+    return { userId, bankAccountId, updateBankAccountDto };
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} bankAccount`;
   }
 }

@@ -22,6 +22,9 @@ let BankAccountsRepository = class BankAccountsRepository {
     findMany(findManyDto) {
         return this.prismaService.bankAccount.findMany(findManyDto);
     }
+    findFirst(findFirstDto) {
+        return this.prismaService.bankAccount.findFirst(findFirstDto);
+    }
 };
 BankAccountsRepository = __decorate([
     (0, common_1.Injectable)(),

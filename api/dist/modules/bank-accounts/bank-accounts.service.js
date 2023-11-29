@@ -33,8 +33,14 @@ let BankAccountsService = class BankAccountsService {
             where: { userId },
         });
     }
-    update(id, updateBankAccountDto) {
-        return `This action updates a #${id} bankAccount`;
+    async update(userId, bankAccountId, updateBankAccountDto) {
+        const isOwner = await this.bankAccountsRepo.findFirst({
+            where: { userId, id: bankAccountId },
+        });
+        if (!isOwner) {
+            throw new common_1.NotFoundException('You are not the owner of this bank account');
+        }
+        return { userId, bankAccountId, updateBankAccountDto };
     }
     remove(id) {
         return `This action removes a #${id} bankAccount`;

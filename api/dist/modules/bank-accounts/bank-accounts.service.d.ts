@@ -20,6 +20,10 @@ export declare class BankAccountsService {
         type: import(".prisma/client").$Enums.BankAccountType;
         color: string;
     }[]>;
-    update(id: number, updateBankAccountDto: UpdateBankAccountDto): string;
-    remove(id: number): string;
+    update(userId: string, bankAccountId: string, updateBankAccountDto: UpdateBankAccountDto): Promise<{
+        userId: string;
+        bankAccountId: string;
+        updateBankAccountDto: UpdateBankAccountDto;
+    }>;
+    remove(id: string): string;
 }

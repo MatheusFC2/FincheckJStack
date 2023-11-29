@@ -28,11 +28,11 @@ let BankAccountsController = class BankAccountsController {
     findAll(userId) {
         return this.bankAccountsService.findAllByUserId(userId);
     }
-    update(id, updateBankAccountDto) {
-        return this.bankAccountsService.update(+id, updateBankAccountDto);
+    update(userId, bankAccountId, updateBankAccountDto) {
+        return this.bankAccountsService.update(userId, bankAccountId, updateBankAccountDto);
     }
     remove(id) {
-        return this.bankAccountsService.remove(+id);
+        return this.bankAccountsService.remove(id);
     }
 };
 __decorate([
@@ -51,11 +51,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    (0, common_1.Put)(':bankAccountId'),
+    __param(0, (0, ActiveUserId_1.ActiveUserId)()),
+    __param(1, (0, common_1.Param)('bankAccountId')),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_bank_account_dto_1.UpdateBankAccountDto]),
+    __metadata("design:paramtypes", [String, String, update_bank_account_dto_1.UpdateBankAccountDto]),
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "update", null);
 __decorate([
