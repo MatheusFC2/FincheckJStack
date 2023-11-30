@@ -16,14 +16,20 @@ let BankAccountsRepository = class BankAccountsRepository {
     constructor(prismaService) {
         this.prismaService = prismaService;
     }
-    create(createDto) {
-        return this.prismaService.bankAccount.create(createDto);
-    }
     findMany(findManyDto) {
         return this.prismaService.bankAccount.findMany(findManyDto);
     }
     findFirst(findFirstDto) {
         return this.prismaService.bankAccount.findFirst(findFirstDto);
+    }
+    create(createDto) {
+        return this.prismaService.bankAccount.create(createDto);
+    }
+    update(updateDto) {
+        return this.prismaService.bankAccount.update(updateDto);
+    }
+    delete(deleteDto) {
+        return this.prismaService.bankAccount.delete(deleteDto);
     }
 };
 BankAccountsRepository = __decorate([

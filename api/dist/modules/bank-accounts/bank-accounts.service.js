@@ -38,12 +38,33 @@ let BankAccountsService = class BankAccountsService {
             where: { userId, id: bankAccountId },
         });
         if (!isOwner) {
-            throw new common_1.NotFoundException('You are not the owner of this bank account');
+            throw new common_1.NotFoundException('Bank account not found');
         }
-        return { userId, bankAccountId, updateBankAccountDto };
+        const { color, initialBalance, name, type } = updateBankAccountDto;
+        return this.bankAccountsRepo.update({
+            where: { id: bankAccountId },
+            data: {
+                color,
+                initialBalance,
+                name,
+                type,
+            },
+        });
     }
-    remove(id) {
-        return `This action removes a #${id} bankAccount`;
+    async remove(userId, bankAccountId) {
+        await this.validateBankAccountOwnership(userId, bankAccountId);
+        await this.bankAccountsRepo.findFirst({
+            where: { id: bankAccountId },
+        });
+        return null;
+    }
+    async validateBankAccountOwnership(userId, bankAccountId) {
+        const isOwner = await this.bankAccountsRepo.findFirst({
+            where: { id: bankAccountId, userId },
+        });
+        if (!isOwner) {
+            throw new common_1.NotFoundException('Bank account not found');
+        }
     }
 };
 BankAccountsService = __decorate([

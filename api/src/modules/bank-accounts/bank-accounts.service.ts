@@ -37,12 +37,42 @@ export class BankAccountsService {
     });
 
     if (!isOwner) {
-      throw new NotFoundException('You are not the owner of this bank account');
+      throw new NotFoundException('Bank account not found');
     }
-    return { userId, bankAccountId, updateBankAccountDto };
+
+    const { color, initialBalance, name, type } = updateBankAccountDto;
+
+    return this.bankAccountsRepo.update({
+      where: { id: bankAccountId },
+      data: {
+        color,
+        initialBalance,
+        name,
+        type,
+      },
+    });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} bankAccount`;
+  async remove(userId: string, bankAccountId: string) {
+    await this.validateBankAccountOwnership(userId, bankAccountId);
+
+    await this.bankAccountsRepo.findFirst({
+      where: { id: bankAccountId },
+    });
+
+    return null;
+  }
+
+  private async validateBankAccountOwnership(
+    userId: string,
+    bankAccountId: string,
+  ) {
+    const isOwner = await this.bankAccountsRepo.findFirst({
+      where: { id: bankAccountId, userId },
+    });
+
+    if (!isOwner) {
+      throw new NotFoundException('Bank account not found');
+    }
   }
 }

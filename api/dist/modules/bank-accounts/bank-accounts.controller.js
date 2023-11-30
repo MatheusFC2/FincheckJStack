@@ -31,8 +31,8 @@ let BankAccountsController = class BankAccountsController {
     update(userId, bankAccountId, updateBankAccountDto) {
         return this.bankAccountsService.update(userId, bankAccountId, updateBankAccountDto);
     }
-    remove(id) {
-        return this.bankAccountsService.remove(id);
+    remove(userId, bankAccountId) {
+        return this.bankAccountsService.remove(userId, bankAccountId);
     }
 };
 __decorate([
@@ -53,17 +53,19 @@ __decorate([
 __decorate([
     (0, common_1.Put)(':bankAccountId'),
     __param(0, (0, ActiveUserId_1.ActiveUserId)()),
-    __param(1, (0, common_1.Param)('bankAccountId')),
+    __param(1, (0, common_1.Param)('bankAccountId', common_1.ParseUUIDPipe)),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, update_bank_account_dto_1.UpdateBankAccountDto]),
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(':bankAccountId'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
+    __param(0, (0, ActiveUserId_1.ActiveUserId)()),
+    __param(1, (0, common_1.Param)('bankAccountId', common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], BankAccountsController.prototype, "remove", null);
 BankAccountsController = __decorate([

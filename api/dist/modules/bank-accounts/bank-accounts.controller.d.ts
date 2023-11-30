@@ -21,9 +21,12 @@ export declare class BankAccountsController {
         color: string;
     }[]>;
     update(userId: string, bankAccountId: string, updateBankAccountDto: UpdateBankAccountDto): Promise<{
+        id: string;
         userId: string;
-        bankAccountId: string;
-        updateBankAccountDto: UpdateBankAccountDto;
+        name: string;
+        initialBalance: number;
+        type: import(".prisma/client").$Enums.BankAccountType;
+        color: string;
     }>;
-    remove(id: string): string;
+    remove(userId: string, bankAccountId: string): Promise<any>;
 }
