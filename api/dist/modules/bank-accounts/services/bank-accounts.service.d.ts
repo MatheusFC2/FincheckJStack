@@ -1,9 +1,11 @@
-import { CreateBankAccountDto } from './dto/create-bank-account.dto';
-import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
+import { CreateBankAccountDto } from '../dto/create-bank-account.dto';
+import { UpdateBankAccountDto } from '../dto/update-bank-account.dto';
 import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repositories';
+import { ValidateBankAccountOwnershipService } from './validate-bank-account-ownership.service';
 export declare class BankAccountsService {
     private readonly bankAccountsRepo;
-    constructor(bankAccountsRepo: BankAccountsRepository);
+    private readonly validateBankAccountOwnershipService;
+    constructor(bankAccountsRepo: BankAccountsRepository, validateBankAccountOwnershipService: ValidateBankAccountOwnershipService);
     create(userId: string, createBankAccountDto: CreateBankAccountDto): import(".prisma/client").Prisma.Prisma__BankAccountClient<{
         id: string;
         userId: string;
@@ -29,5 +31,4 @@ export declare class BankAccountsService {
         color: string;
     }>;
     remove(userId: string, bankAccountId: string): Promise<any>;
-    private validateBankAccountOwnership;
 }

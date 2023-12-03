@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BankAccountsService = void 0;
 const common_1 = require("@nestjs/common");
-const bank_accounts_repositories_1 = require("../../shared/database/repositories/bank-accounts.repositories");
+const bank_accounts_repositories_1 = require("../../../shared/database/repositories/bank-accounts.repositories");
+const validate_bank_account_ownership_service_1 = require("./validate-bank-account-ownership.service");
 let BankAccountsService = class BankAccountsService {
-    constructor(bankAccountsRepo) {
+    constructor(bankAccountsRepo, validateBankAccountOwnershipService) {
         this.bankAccountsRepo = bankAccountsRepo;
+        this.validateBankAccountOwnershipService = validateBankAccountOwnershipService;
     }
     create(userId, createBankAccountDto) {
         const { color, initialBalance, name, type } = createBankAccountDto;
@@ -34,12 +36,7 @@ let BankAccountsService = class BankAccountsService {
         });
     }
     async update(userId, bankAccountId, updateBankAccountDto) {
-        const isOwner = await this.bankAccountsRepo.findFirst({
-            where: { userId, id: bankAccountId },
-        });
-        if (!isOwner) {
-            throw new common_1.NotFoundException('Bank account not found');
-        }
+        await this.validateBankAccountOwnershipService.validate(bankAccountId, userId);
         const { color, initialBalance, name, type } = updateBankAccountDto;
         return this.bankAccountsRepo.update({
             where: { id: bankAccountId },
@@ -52,24 +49,14 @@ let BankAccountsService = class BankAccountsService {
         });
     }
     async remove(userId, bankAccountId) {
-        await this.validateBankAccountOwnership(userId, bankAccountId);
-        await this.bankAccountsRepo.findFirst({
-            where: { id: bankAccountId },
-        });
+        await this.validateBankAccountOwnershipService.validate(bankAccountId, userId);
         return null;
-    }
-    async validateBankAccountOwnership(userId, bankAccountId) {
-        const isOwner = await this.bankAccountsRepo.findFirst({
-            where: { id: bankAccountId, userId },
-        });
-        if (!isOwner) {
-            throw new common_1.NotFoundException('Bank account not found');
-        }
     }
 };
 BankAccountsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [bank_accounts_repositories_1.BankAccountsRepository])
+    __metadata("design:paramtypes", [bank_accounts_repositories_1.BankAccountsRepository,
+        validate_bank_account_ownership_service_1.ValidateBankAccountOwnershipService])
 ], BankAccountsService);
 exports.BankAccountsService = BankAccountsService;
 //# sourceMappingURL=bank-accounts.service.js.map

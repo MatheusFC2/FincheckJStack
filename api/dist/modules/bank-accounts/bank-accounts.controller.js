@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BankAccountsController = void 0;
 const common_1 = require("@nestjs/common");
-const bank_accounts_service_1 = require("./bank-accounts.service");
+const bank_accounts_service_1 = require("./services/bank-accounts.service");
 const create_bank_account_dto_1 = require("./dto/create-bank-account.dto");
 const update_bank_account_dto_1 = require("./dto/update-bank-account.dto");
 const ActiveUserId_1 = require("../../shared/decorators/ActiveUserId");
