@@ -14,15 +14,16 @@ const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const jwt_1 = require("@nestjs/jwt");
 const env_1 = require("../../shared/config/env");
+const IsPublic_1 = require("../../shared/decorators/IsPublic");
 let AuthGuard = class AuthGuard {
     constructor(jwtService, reflector) {
         this.jwtService = jwtService;
         this.reflector = reflector;
     }
     async canActivate(context) {
-        const isPublic = this.reflector.getAllAndOverride('IS_PUBLIC', [
-            context.getHandler(),
+        const isPublic = this.reflector.getAllAndOverride(IsPublic_1.IS_PUBLIC_KEY, [
             context.getClass(),
+            context.getHandler(),
         ]);
         if (isPublic) {
             return true;
@@ -30,7 +31,7 @@ let AuthGuard = class AuthGuard {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
         if (!token) {
-            throw new common_1.UnauthorizedException();
+            throw new common_1.UnauthorizedException('Missing access token.');
         }
         try {
             const payload = await this.jwtService.verifyAsync(token, {
@@ -39,7 +40,7 @@ let AuthGuard = class AuthGuard {
             request['userId'] = payload.sub;
         }
         catch (_a) {
-            throw new common_1.UnauthorizedException();
+            throw new common_1.UnauthorizedException('Invalid access token.');
         }
         return true;
     }

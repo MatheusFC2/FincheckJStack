@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.env = void 0;
+exports.errors = exports.env = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class Env {
@@ -17,20 +17,21 @@ class Env {
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.NotEquals)('unsecure_jwt_secret'),
     __metadata("design:type", String)
-], Env.prototype, "dbURL", void 0);
+], Env.prototype, "jwtSecret", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.NotEquals)('unsecure_jwt_secret'),
     __metadata("design:type", String)
-], Env.prototype, "jwtSecret", void 0);
+], Env.prototype, "databaseUrl", void 0);
 exports.env = (0, class_transformer_1.plainToInstance)(Env, {
-    dbURL: process.env.DATABASE_URL,
     jwtSecret: process.env.JWT_SECRET,
+    databaseUrl: process.env.DATABASE_URL,
 });
-const errors = (0, class_validator_1.validateSync)(exports.env);
-if (errors.length > 0) {
-    throw new Error(JSON.stringify(errors, null, 2));
+exports.errors = (0, class_validator_1.validateSync)(exports.env);
+if (exports.errors.length > 0) {
+    throw new Error(JSON.stringify(exports.errors, null, 4));
 }
 //# sourceMappingURL=env.js.map
