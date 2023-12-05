@@ -14,6 +14,8 @@ const auth_module_1 = require("./modules/auth/auth.module");
 const auth_guard_1 = require("./modules/auth/auth.guard");
 const categories_module_1 = require("./modules/categories/categories.module");
 const bank_accounts_module_1 = require("./modules/bank-accounts/bank-accounts.module");
+const transactions_module_1 = require("./modules/transactions/transactions.module");
+const core_1 = require("@nestjs/core");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -24,11 +26,12 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             categories_module_1.CategoriesModule,
             bank_accounts_module_1.BankAccountsModule,
+            transactions_module_1.TransactionsModule,
         ],
         controllers: [],
         providers: [
             {
-                provide: 'APP_GUARD',
+                provide: core_1.APP_GUARD,
                 useClass: auth_guard_1.AuthGuard,
             },
         ],
