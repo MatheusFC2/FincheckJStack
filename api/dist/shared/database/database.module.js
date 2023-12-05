@@ -12,6 +12,7 @@ const prisma_service_1 = require("./prisma.service");
 const users_repositories_1 = require("./repositories/users.repositories");
 const categories_repositories_1 = require("./repositories/categories.repositories");
 const bank_accounts_repositories_1 = require("./repositories/bank-accounts.repositories");
+const transactions_repositories_1 = require("./repositories/transactions.repositories");
 let DatabaseModule = class DatabaseModule {
 };
 DatabaseModule = __decorate([
@@ -22,8 +23,14 @@ DatabaseModule = __decorate([
             users_repositories_1.UsersRepository,
             categories_repositories_1.CategoriesRepository,
             bank_accounts_repositories_1.BankAccountsRepository,
+            transactions_repositories_1.TransactionsRepository,
         ],
-        exports: [users_repositories_1.UsersRepository, categories_repositories_1.CategoriesRepository, bank_accounts_repositories_1.BankAccountsRepository],
+        exports: [
+            users_repositories_1.UsersRepository,
+            categories_repositories_1.CategoriesRepository,
+            bank_accounts_repositories_1.BankAccountsRepository,
+            transactions_repositories_1.TransactionsRepository,
+        ],
     })
 ], DatabaseModule);
 exports.DatabaseModule = DatabaseModule;
